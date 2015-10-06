@@ -1,6 +1,4 @@
 #lang racket
-(require rackunit rackunit/text-ui)
-
 (require 2htdp/batch-io)
 
 (provide find-anagrams

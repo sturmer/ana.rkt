@@ -4,10 +4,6 @@
 (require rackunit rackunit/text-ui)
 
 (module+ test
-  
-  
-  ;(require 2htdp/batch-io)
-  
   (define sortw-tests
     (test-suite
      "sortw suite"
