@@ -103,8 +103,12 @@ explicitly closed, allowing the query of several words.
    
    (test-case
     "Test anagram finder"
-    (let ([an (find-anagrams "live")])
+    (let ([an (find-anagrams "live")]
+          [an2 (find-anagrams "revenue")]
+          [an3 (find-anagrams "ixxa")])
       (check-equal? an '("vile" "veil" "live" "evil"))
+      (check-equal? an2 '("revenue"))
+      (check-equal? an3 (void)) ; Also prints "Not found: ixxa"
       ))))
 
 
