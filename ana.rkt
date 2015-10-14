@@ -1,5 +1,4 @@
 #lang racket
-(require 2htdp/batch-io)
 
 (provide find-anagrams
          sortw
@@ -23,19 +22,6 @@
     h)  
   )
 
-; For each line in file, append to list
-; Return list
-; (credit: http://rosettacode.org/wiki/Read_a_file_line_by_line)
-#|
-(define (read-next-line-iter file)
-  (let ([line (read-line file)])
-    (unless (eof-object? line)
-      (printf "Line: '~a'\n" line)
-      (append (read-next-line-iter file) line))      
-    )
-  )
-|#
-
 (define (fa w)
   #|
 - Open dictionary file (/usr/share/dict/words), 
@@ -50,7 +36,7 @@ Return value: the list of words given the key
 Improvement: read the dict once at program startup, and stay open until the program is
 explicitly closed, allowing the query of several words.
   |#  
-  (define words (read-lines "/usr/share/dict/words"))  
+  (define words (file->lines "/usr/share/dict/words"))  
   (let ([h (hash-words words)])
     (hash-ref h (sortw w) (lambda () (printf "Not found: ~a\n" w)))
     ))
