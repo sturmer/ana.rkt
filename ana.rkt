@@ -1,13 +1,13 @@
 #lang racket
 
 (provide find-anagrams
-         sortw
+         string-sort-letters
          hash-words)
 
 ;; (require readline) ; TODO for prompting users
 
 ;; Given a word, return its anagram where all letters are sorted
-(define (sortw word)
+(define (string-sort-letters word)
   (list->string (sort (string->list word) char<?)))
 
 ;; Given a list, build a hash where key is the sorted anagram, 
@@ -16,12 +16,12 @@
 (define (hash-words input-lst)
   (define h (make-hash))
   (for ([w (in-list input-lst)])
-    (define k (sortw w))
+    (define k (string-sort-letters w))
     (hash-set! h k 
                (cons w (hash-ref h k empty))))
   h)
 
-(define (fa w)  
+(define (find-anagrams w)
   ;; - Open dictionary file (/usr/share/dict/words), 
   ;; - read the entries in a list, and 
   ;; - build a hash table where the key is the sorted letters, and the value is a
@@ -36,7 +36,4 @@
   
   (define words (file->lines "/usr/share/dict/words"))  
   (define h (hash-words words))
-  (hash-ref h (sortw w) (lambda () (printf "Not found: ~a\n" w))))
-
-;; Alias
-(define find-anagrams fa)
+  (hash-ref h (string-sort-letters w) (lambda () (printf "Not found: ~a\n" w))))

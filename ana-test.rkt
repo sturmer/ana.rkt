@@ -9,13 +9,13 @@
      "sortw suite"
      
      (test-equal? "Empty string"              
-                  (sortw "") "")
+                  (string-sort-letters "") "")
      
      (test-equal? "leg -> egl"              
-                  (sortw "leg") "egl")
+                  (string-sort-letters "leg") "egl")
      (test-case 
       "Long word with repeated letters"
-      (check-equal? (sortw "heautontimoroumenos") "aeehimmnnoooorsttuu")
+      (check-equal? (string-sort-letters "heautontimoroumenos") "aeehimmnnoooorsttuu")
       (check-equal? 
        (string-length "heautontimoroumenos")
        (string-length "aeehimmnnoooorsttuu")))   
@@ -34,17 +34,7 @@
       (define res-values (hash-ref result-hash "egl"))
       (check-equal? (sort exp-values string<?) 
                     (sort res-values string<?)))
-     
-     
-     #;(test-case
-        "Read lines"
-        (let* ([file (open-input-file "10-lines.txt")]
-               [exp-list '("A" "A's" "AA's" "AB's" "ABM's" "AC's" 
-                               "ACTH's" "AI's" "AIDS's" "AM's")]           
-               [retrieved-list (read-next-line-iter file)])
-          (check-equal? retrieved-list exp-list))
-        )  
-     
+
      (test-case
       "Test anagram finder"
       (define an (find-anagrams "live"))
